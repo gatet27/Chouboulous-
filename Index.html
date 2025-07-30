@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Airchouboulou - Réservation</title>
+    <style>
+        body {
+            background-color: #b3e5fc;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+        }
+        .step {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 25px;
+            font-size: 18px;
+            background-color: #0288d1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+        }
+        #ticket {
+            margin-top: 40px;
+            padding: 20px;
+            border: 2px dashed #0288d1;
+            background-color: white;
+            color: black;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>✈️ Réservation Airchouboulou</h1>
+
+    <div class="step active" id="step1">
+        <p>Quel est ton prénom ?</p>
+        <input type="text" id="name">
+        <br><button onclick="nextStep(2)">Suivant</button>
+    </div>
+
+    <div class="step" id="step2">
+        <p>Quelle est ta destination ?</p>
+        <input type="text" id="destination">
+        <br><button onclick="nextStep(3)">Suivant</button>
+    </div>
+
+    <div class="step" id="step3">
+        <p>Quelle est la date de ton vol ?</p>
+        <input type="date" id="date">
+        <br><button onclick="nextStep(4)">Suivant</button>
+    </div>
+
+    <div class="step" id="step4">
+        <p>Choisis ta classe :</p>
+        <select id="classe">
+            <option value="Économie">Économie</option>
+            <option value="Business">Business</option>
+        </select>
+        <br><button onclick="showTicket()">🎫 Réserver</button>
+    </div>
+
+    <div id="ticket"></div>
+
+    <script>
+        function nextStep(step) {
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+        }
+
+        function showTicket() {
+            const name = document.getElementById("name").value;
+            const destination = document.getElementById("destination").value;
+            const date = document.getElementById("date").value;
+            const classe = document.getElementById("classe").value;
+
+            const billet = `
+                <h2>🎫 Billet Airchouboulou</h2>
+                <p><strong>Nom :</strong> ${name}</p>
+                <p><strong>Destination :</strong> ${destination}</p>
+                <p><strong>Date :</strong> ${date}</p>
+                <p><strong>Classe :</strong> ${classe}</p>
+                <p>Bon voyage avec Airchouboulou ! 🛫</p>
+            `;
+            document.getElementById("ticket").innerHTML = billet;
+            document.getElementById("ticket").style.display = "block";
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+        }
+    </script>
+</body>
+</html>
